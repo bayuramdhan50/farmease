@@ -81,7 +81,23 @@ farmease/
 #### Setup Database
 1. Buat database MySQL bernama `farmdb`
 2. Sesuaikan konfigurasi di `backend/.env` sesuai dengan kredensial MySQL Anda
-
+3. Inisialisasi database (membuat tabel):
+   ```
+   cd backend
+   node scripts/initDb.js
+   ```
+4. Masukkan data sampel (opsional):
+   ```
+   cd backend
+   node scripts/insertSampleData.js
+   ```
+   
+   Jika ingin mengosongkan tabel dan memasukkan data sampel baru:
+   ```
+   cd backend
+   node scripts/forceInsertSampleData.js
+   ```
+   
 #### Backend
 1. Buka terminal di folder `backend`
 2. Install dependensi:
