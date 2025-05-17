@@ -1,3 +1,5 @@
+'use client';
+
 import PanenTable from "@/components/PanenTable";
 import Link from "next/link";
 
