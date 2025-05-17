@@ -41,17 +41,33 @@ FarmEase mendukung beberapa Tujuan Pembangunan Berkelanjutan (Sustainable Develo
 
 ```
 farmease/
-├── backend/             # Express.js API
-│   ├── config/          # Konfigurasi database
-│   ├── controllers/     # Controllers untuk logika bisnis
-│   ├── models/          # Model data
-│   ├── routes/          # Definisi API routes
-│   └── scripts/         # Script utilitas (seperti inisialisasi database)
-└── frontend/            # Next.js frontend
-    └── src/
-        ├── app/         # Halaman aplikasi
-        ├── components/  # Komponen UI reusable
-        └── utils/       # Fungsi dan utility helpers
+├── backend/                # Express.js API
+│   ├── config/             # Konfigurasi database
+│   ├── controllers/        # Controllers untuk logika bisnis
+│   ├── models/             # Model data
+│   ├── routes/             # Definisi API routes
+│   └── scripts/            # Script utilitas (seperti inisialisasi database)
+├── frontend/               # Next.js frontend
+│   ├── app/                # Halaman aplikasi Next.js 13+ (App Router)
+│   │   ├── bantuan/        # Halaman bantuan
+│   │   ├── laporan/        # Halaman laporan
+│   │   ├── panen/          # Halaman pengelolaan data panen
+│   │   │   ├── [id]/       # Halaman detail panen
+│   │   │   ├── add/        # Halaman tambah panen
+│   │   │   └── edit/[id]/  # Halaman edit panen
+│   │   ├── sdgs/           # Halaman SDGs
+│   │   ├── tentang/        # Halaman tentang aplikasi
+│   │   ├── globals.css     # Style global
+│   │   ├── layout.tsx      # Layout utama aplikasi
+│   │   └── page.tsx        # Halaman utama (dashboard)
+│   ├── components/         # Komponen UI reusable
+│   │   ├── sdgs/           # Komponen terkait SDGs
+│   │   ├── PanenTable.tsx  # Tabel data panen
+│   │   ├── PanenForm.tsx   # Form input data panen
+│   │   ├── PanenChart.tsx  # Visualisasi data panen
+│   │   └── ...             # Komponen lainnya
+│   └── public/             # Aset statis (gambar, font, dll)
+└── docker-compose.yml      # Konfigurasi Docker Compose
 ```
 
 ## Cara Menjalankan Aplikasi
@@ -63,7 +79,7 @@ farmease/
 ### Langkah-langkah
 
 #### Setup Database
-1. Buat database MySQL bernama `farmease_db`
+1. Buat database MySQL bernama `farmdb`
 2. Sesuaikan konfigurasi di `backend/.env` sesuai dengan kredensial MySQL Anda
 
 #### Backend
@@ -121,6 +137,17 @@ Aplikasi ini juga bisa dijalankan dengan Docker Compose:
    docker-compose up -d
    ```
 3. Akses aplikasi di `http://localhost:3000`
+
+## Fitur SDGs
+
+FarmEase mengintegrasikan dukungan untuk Tujuan Pembangunan Berkelanjutan (SDGs) melalui:
+
+1. **Halaman Khusus SDGs** - Menjelaskan bagaimana aplikasi mendukung SDGs tertentu
+2. **Metrik Keberlanjutan** - Menampilkan produktivitas lahan (kg/Ha) untuk membantu optimalisasi penggunaan sumber daya
+3. **Tips Pertanian Berkelanjutan** - Memberikan saran praktis untuk praktik pertanian yang lebih berkelanjutan
+4. **Komponen SDG** - Badge dan indikator visual yang menunjukkan kontribusi terhadap SDGs
+
+Dengan menggunakan FarmEase, petani tidak hanya mendapat manfaat dari pengelolaan data panen yang lebih baik, tetapi juga berkontribusi pada tujuan keberlanjutan global.
 
 ## Lisensi
 
