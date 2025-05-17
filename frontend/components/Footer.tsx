@@ -10,6 +10,14 @@ export default function Footer() {
             <p className="text-gray-600 text-sm mt-1">
               © {new Date().getFullYear()} FarmEase. Aplikasi Pencatatan Hasil Panen.
             </p>
+            <p className="text-gray-500 text-xs mt-1 flex items-center">
+              <span className="mr-1">Mendukung</span>
+              <Link href="/sdgs" className="text-primary-dark hover:underline flex items-center">
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                  SDGs
+                </span>
+              </Link>
+            </p>
           </div>
           <div className="flex space-x-4">
             <Link href="/" className="text-gray-600 hover:text-primary-dark">
@@ -17,6 +25,9 @@ export default function Footer() {
             </Link>
             <Link href="/tentang" className="text-gray-600 hover:text-primary-dark">
               Tentang
+            </Link>
+            <Link href="/sdgs" className="text-gray-600 hover:text-primary-dark">
+              SDGs
             </Link>
             <Link href="/bantuan" className="text-gray-600 hover:text-primary-dark">
               Bantuan

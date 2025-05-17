@@ -2,12 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
+import SDGBadges from './sdgs/SDGBadges';
 
 interface DashboardStats {
   totalPanen: number;
   totalHasil: number;
   totalLahan: number;
   uniquePlants: number;
+  avgYield: number;
 }
 
 export default function DashboardStats() {
@@ -15,7 +18,8 @@ export default function DashboardStats() {
     totalPanen: 0,
     totalHasil: 0,
     totalLahan: 0,
-    uniquePlants: 0
+    uniquePlants: 0,
+    avgYield: 0
   });
   const [loading, setLoading] = useState(true);
 
@@ -36,11 +40,15 @@ export default function DashboardStats() {
           const uniquePlantNames = new Set(panenData.map((item: any) => item.nama_tanaman));
           const uniquePlants = uniquePlantNames.size;
           
+          // Calculate average yield per hectare (kg/ha)
+          const avgYield = totalLahan > 0 ? totalHasil / totalLahan : 0;
+          
           setStats({
             totalPanen,
             totalHasil,
             totalLahan,
-            uniquePlants
+            uniquePlants,
+            avgYield
           });
         }
         
@@ -65,30 +73,63 @@ export default function DashboardStats() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div className="card bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 border-l-4 border-primary">
-        <h3 className="text-sm text-gray-500 dark:text-gray-300 font-medium">Total Panen</h3>
-        <p className="text-2xl font-bold text-primary-dark mt-2">{stats.totalPanen}</p>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Jumlah pencatatan panen</p>
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="card bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 border-l-4 border-primary">
+          <h3 className="text-sm text-gray-500 dark:text-gray-300 font-medium">Total Panen</h3>
+          <p className="text-2xl font-bold text-primary-dark mt-2">{stats.totalPanen}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Jumlah pencatatan panen</p>
+        </div>
+        
+        <div className="card bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 border-l-4 border-primary-light">
+          <h3 className="text-sm text-gray-500 dark:text-gray-300 font-medium">Total Hasil Panen</h3>
+          <p className="text-2xl font-bold text-primary-light mt-2">{stats.totalHasil.toLocaleString()} kg</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Jumlah hasil panen</p>
+        </div>
+        
+        <div className="card bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 border-l-4 border-accent">
+          <h3 className="text-sm text-gray-500 dark:text-gray-300 font-medium">Total Lahan</h3>
+          <p className="text-2xl font-bold text-accent mt-2">{stats.totalLahan.toLocaleString()} Ha</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Jumlah luas lahan</p>
+        </div>
+        
+        <div className="card bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 border-l-4 border-accent-light">
+          <h3 className="text-sm text-gray-500 dark:text-gray-300 font-medium">Jenis Tanaman</h3>
+          <p className="text-2xl font-bold text-accent-light mt-2">{stats.uniquePlants}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Jumlah jenis tanaman</p>
+        </div>
       </div>
       
-      <div className="card bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 border-l-4 border-primary-light">
-        <h3 className="text-sm text-gray-500 dark:text-gray-300 font-medium">Total Hasil Panen</h3>
-        <p className="text-2xl font-bold text-primary-light mt-2">{stats.totalHasil.toLocaleString()} kg</p>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Jumlah hasil panen</p>
+      {/* Sustainability Metric Card */}
+      <div className="mt-4 card bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-800">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
+          <div>
+            <div className="flex items-center">
+              <h3 className="text-sm font-semibold text-primary-dark">Metrik Keberlanjutan</h3>
+              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                SDGs
+              </span>
+            </div>
+            <div className="mt-2 space-y-2">
+              <div className="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-light mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                <div>
+                  <p className="text-sm font-medium">Produktivitas Lahan:</p>
+                  <p className="text-xl font-bold text-primary-dark">{stats.avgYield.toLocaleString(undefined, { maximumFractionDigits: 2 })} kg/Ha</p>
+                </div>
+              </div>
+              <p className="text-xs text-gray-600 dark:text-gray-300">
+                Meningkatkan produktivitas lahan mendukung SDG 2 (Zero Hunger) dan SDG 12 (Responsible Consumption and Production).
+              </p>
+            </div>
+          </div>
+          <div className="mt-4 md:mt-0">
+            <SDGBadges size="sm" />
+          </div>
+        </div>
       </div>
-      
-      <div className="card bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 border-l-4 border-accent">
-        <h3 className="text-sm text-gray-500 dark:text-gray-300 font-medium">Total Lahan</h3>
-        <p className="text-2xl font-bold text-accent mt-2">{stats.totalLahan.toLocaleString()} Ha</p>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Jumlah luas lahan</p>
-      </div>
-      
-      <div className="card bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 border-l-4 border-accent-light">
-        <h3 className="text-sm text-gray-500 dark:text-gray-300 font-medium">Jenis Tanaman</h3>
-        <p className="text-2xl font-bold text-accent-light mt-2">{stats.uniquePlants}</p>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Jumlah jenis tanaman</p>
-      </div>
-    </div>
+    </>
   );
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DashboardStats from "@/components/DashboardStats";
 import PanenChart from "@/components/PanenChart";
+import SDGBadges from "@/components/sdgs/SDGBadges";
 
 export default function Home() {
   return (
@@ -11,6 +12,9 @@ export default function Home() {
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
           Aplikasi pencatatan hasil panen yang memudahkan petani mengelola dan menganalisis data panen mereka.
         </p>
+        <div className="flex justify-center mt-4">
+          <SDGBadges size="sm" />
+        </div>
       </div>
 
       <DashboardStats />
@@ -70,6 +74,31 @@ export default function Home() {
               </div>
             </Link>
           </div>
+        </div>
+      </div>
+      
+      {/* SDGs Section */}
+      <div className="card mt-8 bg-green-50 dark:bg-green-900">
+        <div className="flex flex-col md:flex-row md:items-center justify-between">
+          <div className="mb-4 md:mb-0 md:mr-6">
+            <h2 className="text-xl font-semibold text-primary-dark mb-2">
+              Mendukung Tujuan Pembangunan Berkelanjutan (SDGs)
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300">
+              FarmEase ikut berperan dalam mencapai beberapa Tujuan Pembangunan Berkelanjutan,
+              termasuk Zero Hunger (SDG 2), Responsible Consumption (SDG 12), Climate Action (SDG 13),
+              dan Life on Land (SDG 15).
+            </p>
+          </div>
+          <Link 
+            href="/sdgs" 
+            className="btn-primary self-start md:self-center flex items-center whitespace-nowrap"
+          >
+            <span>Pelajari Lebih Lanjut</span>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
       </div>
     </div>

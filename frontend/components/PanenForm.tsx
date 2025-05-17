@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 interface PanenFormProps {
   onSuccess?: () => void;
@@ -175,6 +176,30 @@ export default function PanenForm({ onSuccess }: PanenFormProps) {
         >
           {loading ? 'Menyimpan...' : 'Simpan Data'}
         </button>
+        
+        {/* Sustainability Tips Section */}
+        <div className="mt-8 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-800">
+          <h3 className="text-sm font-semibold text-primary-dark flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Tips Pertanian Berkelanjutan
+          </h3>
+          <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+            <p className="mb-2">
+              Dengan mencatat data panen Anda, Anda berkontribusi pada pertanian yang lebih berkelanjutan. 
+              Berikut beberapa tips:
+            </p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Bandingkan hasil panen dari waktu ke waktu untuk mengidentifikasi praktik terbaik</li>
+              <li>Gunakan data untuk mengoptimalkan penggunaan lahan dan sumber daya</li>
+              <li>Catat faktor lain seperti cuaca dan penggunaan pupuk untuk analisis lebih mendalam</li>
+            </ul>
+            <div className="mt-2 text-xs text-gray-500">
+              <Link href="/sdgs" className="text-primary-dark hover:underline">Pelajari lebih lanjut</Link> tentang bagaimana FarmEase mendukung Tujuan Pembangunan Berkelanjutan (SDGs).
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );

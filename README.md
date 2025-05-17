@@ -1,6 +1,6 @@
 # FarmEase - Aplikasi Pencatatan Hasil Panen
 
-FarmEase adalah aplikasi web fullstack untuk pencatatan dan analisis hasil panen pertanian.
+FarmEase adalah aplikasi web fullstack untuk pencatatan dan analisis hasil panen pertanian yang mendukung praktik pertanian berkelanjutan.
 
 ## Fitur Utama
 
@@ -9,6 +9,19 @@ FarmEase adalah aplikasi web fullstack untuk pencatatan dan analisis hasil panen
 - Analisis data panen dengan visualisasi grafik
 - Ekspor data ke format Excel dan PDF
 - Antarmuka yang responsif dan user-friendly
+- Dukungan Tujuan Pembangunan Berkelanjutan (SDGs)
+
+## Dukungan terhadap SDGs
+
+FarmEase mendukung beberapa Tujuan Pembangunan Berkelanjutan (Sustainable Development Goals/SDGs), antara lain:
+
+1. **SDG 2: Zero Hunger** - Dengan memantau dan mengoptimalkan produksi pertanian, FarmEase membantu meningkatkan ketahanan pangan.
+   
+2. **SDG 12: Responsible Consumption and Production** - Aplikasi ini mendorong efisiensi sumber daya dengan memantau hasil panen per satuan lahan.
+   
+3. **SDG 13: Climate Action** - Data historis membantu petani mengidentifikasi tren yang mungkin terkait dengan perubahan iklim.
+   
+4. **SDG 15: Life on Land** - FarmEase mendukung praktik pertanian berkelanjutan yang menjaga ekosistem darat.
 
 ## Teknologi
 

@@ -25,6 +25,13 @@ export default function AboutPage() {
             Aplikasi ini dikembangkan dengan teknologi modern menggunakan Next.js, React, dan Node.js, 
             menjadikannya cepat, responsif, dan mudah digunakan.
           </p>
+          <p className="text-gray-600 dark:text-gray-300 mb-4">
+            FarmEase juga mendukung beberapa Tujuan Pembangunan Berkelanjutan (SDGs), termasuk Zero Hunger (SDG 2), 
+            Responsible Consumption and Production (SDG 12), Climate Action (SDG 13), dan Life on Land (SDG 15).
+            <Link href="/sdgs" className="text-primary-dark hover:underline ml-1">
+              Pelajari lebih lanjut tentang FarmEase & SDGs
+            </Link>
+          </p>
         </div>
         
         <div className="bg-green-50 dark:bg-green-900 p-8 rounded-lg">

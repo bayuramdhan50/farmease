@@ -49,6 +49,13 @@ export default function Header() {
           <Link href="/laporan" className="text-gray-600 hover:text-primary-dark font-medium">
             Laporan
           </Link>
+          <Link href="/sdgs" className="text-gray-600 hover:text-primary-dark font-medium flex items-center">
+            <span>SDGs</span>
+            <span className="ml-1 bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded-full">New</span>
+          </Link>
+          <Link href="/tentang" className="text-gray-600 hover:text-primary-dark font-medium">
+            Tentang
+          </Link>
         </nav>
       </div>
 
@@ -64,6 +71,13 @@ export default function Header() {
             </Link>
             <Link href="/laporan" className="block px-3 py-2 text-gray-600 hover:text-primary-dark font-medium" onClick={() => setIsMenuOpen(false)}>
               Laporan
+            </Link>
+            <Link href="/sdgs" className="block px-3 py-2 text-gray-600 hover:text-primary-dark font-medium flex items-center" onClick={() => setIsMenuOpen(false)}>
+              <span>SDGs</span>
+              <span className="ml-1 bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded-full">New</span>
+            </Link>
+            <Link href="/tentang" className="block px-3 py-2 text-gray-600 hover:text-primary-dark font-medium" onClick={() => setIsMenuOpen(false)}>
+              Tentang
             </Link>
           </div>
         </div>
