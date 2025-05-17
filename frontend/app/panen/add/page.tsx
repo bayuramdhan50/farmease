@@ -1,7 +1,12 @@
+'use client';
+
 import Link from "next/link";
 import PanenForm from "@/components/PanenForm";
+import { useRouter } from "next/navigation";
 
 export default function AddPanenPage() {
+  const router = useRouter();
+  
   return (
     <div className="space-y-6">
       <div className="flex items-center mb-6">
@@ -14,7 +19,7 @@ export default function AddPanenPage() {
       </div>
       
       <div className="max-w-2xl mx-auto">
-        <PanenForm onSuccess={() => window.location.href = '/panen'} />
+        <PanenForm onSuccess={() => router.push('/panen')} />
       </div>
     </div>
   );
