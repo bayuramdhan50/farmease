@@ -120,11 +120,19 @@ farmease/
    ```
    npm install
    ```
-3. Jalankan server development:
+3. Pastikan file `.env` telah ada dengan konfigurasi berikut:
+   ```
+   # API Configuration
+   NEXT_PUBLIC_API_URL=http://localhost:5000/api
+   
+   # Environment mode
+   NODE_ENV=development
+   ```
+4. Jalankan server development:
    ```
    npm run dev
    ```
-4. Akses aplikasi di `http://localhost:3000`
+5. Akses aplikasi di `http://localhost:3000`
 
 ## API Endpoints
 
@@ -145,14 +153,31 @@ Menghapus data panen berdasarkan ID.
 
 ## Docker Deployment
 
-Aplikasi ini juga bisa dijalankan dengan Docker Compose:
+Aplikasi ini bisa dijalankan dengan Docker Compose dengan cepat dan mudah:
 
-1. Pastikan Docker dan Docker Compose terinstal
-2. Jalankan:
+1. Pastikan Docker dan Docker Compose terinstal di komputer Anda
+2. Buka terminal dan arahkan ke direktori root proyek (yang berisi file docker-compose.yml)
+3. Jalankan perintah:
    ```
    docker-compose up -d
    ```
-3. Akses aplikasi di `http://localhost:3000`
+4. Tunggu hingga semua container berjalan (biasanya memerlukan waktu sekitar 1-2 menit)
+5. Akses aplikasi:
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:5000/api/panen
+
+Database dan data sampel akan otomatis diinisialisasi saat pertama kali container MySQL berjalan. Data akan disimpan dalam volume Docker sehingga data tidak akan hilang saat container di-restart.
+
+Untuk menghentikan aplikasi, jalankan:
+```
+docker-compose down
+```
+
+Untuk menghapus semua data dan memulai dari awal:
+```
+docker-compose down -v
+docker-compose up -d
+```
 
 ## Fitur SDGs
 

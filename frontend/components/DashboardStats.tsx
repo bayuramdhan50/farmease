@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import SDGBadges from './sdgs/SDGBadges';
+import { getPanenApiUrl } from '@/utils/api';
 
 interface DashboardStats {
   totalPanen: number;
@@ -27,7 +28,7 @@ export default function DashboardStats() {
     const fetchStats = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:5000/api/panen');
+        const response = await axios.get(getPanenApiUrl());
         const panenData = response.data.data;
         
         if (panenData.length > 0) {

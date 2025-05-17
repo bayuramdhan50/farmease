@@ -5,6 +5,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
+import { getPanenApiUrl } from '@/utils/api';
 
 interface Panen {
   id: number;
@@ -25,7 +26,7 @@ export default function PanenDetailPage({ params }: { params: { id: string } }) 
   useEffect(() => {
     const fetchPanenData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/panen/${params.id}`);
+        const response = await axios.get(getPanenApiUrl(params.id));
         setPanenData(response.data.data);
         setLoading(false);
       } catch (err) {
@@ -49,7 +50,7 @@ export default function PanenDetailPage({ params }: { params: { id: string } }) 
   const handleDelete = async () => {
     if (window.confirm('Apakah Anda yakin ingin menghapus data ini?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/panen/${params.id}`);
+        await axios.delete(getPanenApiUrl(params.id));
         router.push('/panen');
       } catch (err) {
         console.error('Error deleting data:', err);

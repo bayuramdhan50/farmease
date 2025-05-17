@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { getPanenApiUrl } from '@/utils/api';
 
 interface Panen {
   id: number;
@@ -33,7 +34,7 @@ export default function EditPanenForm({ panenId }: EditPanenFormProps) {
     // Fetch existing data
     const fetchPanenData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/panen/${panenId}`);
+        const response = await axios.get(getPanenApiUrl(panenId));
         const data = response.data.data;
         
         setFormData({
@@ -105,7 +106,7 @@ export default function EditPanenForm({ panenId }: EditPanenFormProps) {
         hasil_panen: parseFloat(formData.hasil_panen)
       };
 
-      await axios.put(`http://localhost:5000/api/panen/${panenId}`, payload);
+      await axios.put(getPanenApiUrl(panenId), payload);
       
       setSuccess('Data panen berhasil diperbarui!');
       

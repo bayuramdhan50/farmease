@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { getPanenApiUrl } from '@/utils/api';
 
 interface PanenFormProps {
   onSuccess?: () => void;
@@ -66,7 +67,7 @@ export default function PanenForm({ onSuccess }: PanenFormProps) {
         hasil_panen: parseFloat(formData.hasil_panen)
       };
 
-      await axios.post('http://localhost:5000/api/panen', payload);
+      await axios.post(getPanenApiUrl(), payload);
       
       setSuccess('Data panen berhasil ditambahkan!');
       // Reset form

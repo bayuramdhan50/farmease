@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { getPanenApiUrl } from '@/utils/api';
 
 interface Panen {
   id: number;
@@ -32,7 +33,7 @@ export default function PanenChart() {
   const fetchPanenData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/panen');
+      const response = await axios.get(getPanenApiUrl());
       const data: Panen[] = response.data.data;
       
       // Process data for charting

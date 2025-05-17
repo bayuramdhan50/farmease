@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import * as XLSX from 'xlsx';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+import { getPanenApiUrl } from '@/utils/api';
 
 // Type definition for harvest data
 interface Panen {
@@ -30,7 +31,7 @@ export default function PanenTable() {
   const fetchPanenData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/panen');
+      const response = await axios.get(getPanenApiUrl());
       setPanenData(response.data.data);
       setLoading(false);
     } catch (err) {
@@ -43,7 +44,7 @@ export default function PanenTable() {
   const deletePanen = async (id: number) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus data ini?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/panen/${id}`);
+        await axios.delete(getPanenApiUrl(id));
         // Refresh data after deletion
         fetchPanenData();
       } catch (err) {

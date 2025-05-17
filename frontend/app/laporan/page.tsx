@@ -19,6 +19,7 @@ import {
   ResponsiveContainer,
   LabelList
 } from 'recharts';
+import { getPanenApiUrl } from '@/utils/api';
 
 interface Panen {
   id: number;
@@ -62,7 +63,7 @@ export default function LaporanPage() {
   const fetchPanenData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/panen');
+      const response = await axios.get(getPanenApiUrl());
       const data: Panen[] = response.data.data;
       
       setPanenData(data);
