@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #2E7D32;  /* Dark green */
+  --primary-light: #4CAF50; /* Medium green */
+  --primary-dark: #1B5E20; /* Very dark green */
+  --accent: #8D6E63; /* Brown */
+  --accent-light: #A1887F; /* Light brown */
+  --gray-light: #f3f4f6;
+  --success: #388E3C;
+  --warning: #FF9800;
+  --error: #D32F2F;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --primary-light: #66BB6A;
+    --accent-light: #BCAAA4;
+    --gray-light: #1f2937;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, Arial, sans-serif);
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[#2E7D32] text-white transition-colors duration-300 hover:bg-[#1B5E20] py-2 px-4 rounded-md font-medium;
+  }
+  
+  .btn-secondary {
+    @apply bg-[#8D6E63] text-white transition-colors duration-300 hover:bg-[#A1887F] py-2 px-4 rounded-md font-medium;
+  }
+  
+  .btn-outline {
+    @apply border border-[#2E7D32] text-[#2E7D32] hover:bg-[#E8F5E9] transition-colors duration-300 py-2 px-4 rounded-md font-medium;
+  }
+  
+  .card {
+    @apply rounded-lg shadow-md bg-white dark:bg-gray-800 p-6;
+  }
+  
+  .input-field {
+    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent;
+  }
+  
+  .table-container {
+    @apply overflow-x-auto rounded-lg shadow;
+  }
+  
+  .data-table {
+    @apply min-w-full bg-white dark:bg-gray-800;
+  }
+  
+  .table-header {
+    @apply text-xs text-left uppercase tracking-wider py-3 px-4 bg-[#E8F5E9] dark:bg-[#1B5E20] text-[#1B5E20] dark:text-white font-semibold;
+  }
+  
+  .table-row {
+    @apply border-b border-gray-200 dark:border-gray-700;
+  }
+  
+  .table-row:hover {
+    @apply bg-gray-50 dark:bg-gray-700;
+  }
+  
+  .table-cell {
+    @apply py-3 px-4 text-sm;
+  }
+}
