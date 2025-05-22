@@ -190,6 +190,45 @@ FarmEase mengintegrasikan dukungan untuk Tujuan Pembangunan Berkelanjutan (SDGs)
 
 Dengan menggunakan FarmEase, petani tidak hanya mendapat manfaat dari pengelolaan data panen yang lebih baik, tetapi juga berkontribusi pada tujuan keberlanjutan global.
 
+## PWA Dukungan (Progressive Web App)
+
+FarmEase mendukung fitur Progressive Web App (PWA) yang memungkinkan pengguna untuk menginstal aplikasi di perangkat mereka dan mengaksesnya secara offline. Untuk mengaktifkan fitur PWA, aplikasi memerlukan file-file berikut:
+
+### Icon PWA
+Aplikasi memerlukan file icon untuk mendukung PWA:
+- `frontend/public/icons/icon-192x192.png` - Icon 192x192 piksel untuk sebagian besar perangkat
+- `frontend/public/icons/icon-512x512.png` - Icon 512x512 piksel untuk perangkat resolusi tinggi
+
+### Menambahkan Icons
+Untuk menambahkan icon PWA:
+1. Buat file icon dengan ukuran 192x192 dan 512x512 piksel
+2. Simpan file icon di direktori `frontend/public/icons/`
+3. Pastikan nama file sesuai dengan yang didefinisikan di `manifest.json`
+
+### Manifest.json
+File `manifest.json` di `frontend/public/` berisi konfigurasi PWA seperti nama aplikasi, icon, dan tema warna.
+
+### Fitur Enkripsi Data
+
+FarmEase mengimplementasikan enkripsi data untuk melindungi informasi sensitif pengguna:
+
+- Enkripsi menggunakan algoritma AES-256
+- Field yang dienkripsi meliputi:
+  - Nama tanaman
+  - Catatan panen
+  - Lokasi lahan
+- Aplikasi menampilkan indikator enkripsi di halaman yang menampilkan data terenkripsi
+
+### Cara Kerja Enkripsi:
+1. Data dienkripsi di backend sebelum disimpan ke database
+2. Proses enkripsi menggunakan kunci enkripsi yang disimpan secara aman
+3. Data didekripsi saat diambil dari database
+4. Frontend menampilkan indikator untuk memberitahu pengguna bahwa data dienkripsi
+
+### Keamanan Tambahan:
+- Kunci enkripsi disimpan di file `.env` yang tidak dimasukkan ke dalam repositori
+- Gunakan environment variable untuk menyimpan kunci enkripsi di production
+
 ## Lisensi
 
 Proyek ini dilisensikan di bawah lisensi MIT.

@@ -33,25 +33,44 @@ body {
   font-family: var(--font-sans, Arial, sans-serif);
 }
 
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
 @layer components {
   .btn-primary {
-    @apply bg-[#2E7D32] text-white transition-colors duration-300 hover:bg-[#1B5E20] py-2 px-4 rounded-md font-medium;
+    @apply bg-[#2E7D32] text-white transition-all duration-300 hover:bg-[#1B5E20] hover:shadow-md py-2 px-4 rounded-md font-medium flex items-center justify-center;
   }
   
   .btn-secondary {
-    @apply bg-[#8D6E63] text-white transition-colors duration-300 hover:bg-[#A1887F] py-2 px-4 rounded-md font-medium;
+    @apply bg-[#8D6E63] text-white transition-all duration-300 hover:bg-[#A1887F] hover:shadow-md py-2 px-4 rounded-md font-medium flex items-center justify-center;
   }
   
   .btn-outline {
-    @apply border border-[#2E7D32] text-[#2E7D32] hover:bg-[#E8F5E9] transition-colors duration-300 py-2 px-4 rounded-md font-medium;
+    @apply border border-[#2E7D32] text-[#2E7D32] hover:bg-[#E8F5E9] transition-all duration-300 hover:shadow-md py-2 px-4 rounded-md font-medium flex items-center justify-center;
   }
   
   .card {
-    @apply rounded-lg shadow-md bg-white dark:bg-gray-800 p-6;
+    @apply rounded-lg shadow-md bg-white dark:bg-gray-800 p-6 transition-shadow duration-300 hover:shadow-lg;
   }
   
   .input-field {
-    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent;
+    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all duration-300;
   }
   
   .table-container {
@@ -67,7 +86,7 @@ body {
   }
   
   .table-row {
-    @apply border-b border-gray-200 dark:border-gray-700;
+    @apply border-b border-gray-200 dark:border-gray-700 transition-colors duration-200;
   }
   
   .table-row:hover {
@@ -76,5 +95,133 @@ body {
   
   .table-cell {
     @apply py-3 px-4 text-sm;
+  }
+  
+  /* Animation utilities */
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .animate-slideInUp {
+    animation: slideInUp 0.5s ease-out;
+  }
+  
+  .animate-slideInRight {
+    animation: slideInRight 0.5s ease-out;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .animate-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
+  }
+  
+  .animate-float-delay {
+    animation: float-delay 5s ease-in-out infinite;
+  }
+  
+  .animation-delay-500 {
+    animation-delay: 0.5s;
+  }
+  
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+  
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  .hover-lift {
+    transition-property: transform, box-shadow;
+    transition-duration: 300ms;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes float-slow {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes float-delay {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
   }
 }

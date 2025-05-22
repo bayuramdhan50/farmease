@@ -2,12 +2,16 @@
 
 import PanenTable from "@/components/PanenTable";
 import Link from "next/link";
+import EncryptionIndicator from "@/components/EncryptionIndicator";
 
 export default function PanenPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Data Hasil Panen</h1>
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Data Hasil Panen</h1>
+          <EncryptionIndicator />
+        </div>
         <Link 
           href="/panen/add" 
           className="btn-primary flex items-center"

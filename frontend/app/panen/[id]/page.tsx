@@ -6,6 +6,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { getPanenApiUrl } from '@/utils/api';
+import EncryptionIndicator from '@/components/EncryptionIndicator';
 
 interface Panen {
   id: number;
@@ -13,6 +14,8 @@ interface Panen {
   luas_lahan: number;
   tanggal_tanam: string;
   hasil_panen: number;
+  catatan?: string;
+  lokasi?: string;
   created_at: string;
   updated_at: string;
 }
@@ -98,9 +101,12 @@ export default function PanenDetailPage({ params }: { params: { id: string } }) 
       
       <div className="card">
         <div className="flex justify-between items-start mb-6">
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-            Detail Hasil Panen
-          </h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+              Detail Hasil Panen
+            </h1>
+            <EncryptionIndicator />
+          </div>
           
           <div className="flex space-x-2">
             <Link 
@@ -131,13 +137,20 @@ export default function PanenDetailPage({ params }: { params: { id: string } }) 
           </div>
           
           <div className="bg-green-50 dark:bg-green-900 p-4 rounded-lg">
-            <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Nama Tanaman</h3>
+            <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1 flex items-center">
+              Nama Tanaman
+              <span className="ml-2 inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </span>
+            </h3>
             <p className="text-lg font-medium">{panenData.nama_tanaman}</p>
           </div>
           
           <div className="bg-green-50 dark:bg-green-900 p-4 rounded-lg">
             <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Luas Lahan</h3>
-            <p className="text-lg font-medium">{panenData.luas_lahan} Ha</p>
+            <p className="text-lg font-medium">{panenData.luas_lahan} m²</p>
           </div>
           
           <div className="bg-green-50 dark:bg-green-900 p-4 rounded-lg">
@@ -153,9 +166,37 @@ export default function PanenDetailPage({ params }: { params: { id: string } }) 
           <div className="bg-green-50 dark:bg-green-900 p-4 rounded-lg">
             <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Produktivitas</h3>
             <p className="text-lg font-medium">
-              {(panenData.hasil_panen / panenData.luas_lahan).toFixed(2)} Kg/Ha
+              {(panenData.hasil_panen / panenData.luas_lahan * 10000).toFixed(2)} Kg/Ha
             </p>
           </div>
+          
+          {panenData.lokasi && (
+            <div className="bg-green-50 dark:bg-green-900 p-4 rounded-lg md:col-span-2">
+              <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1 flex items-center">
+                Lokasi
+                <span className="ml-2 inline-flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </span>
+              </h3>
+              <p className="text-lg font-medium">{panenData.lokasi}</p>
+            </div>
+          )}
+          
+          {panenData.catatan && (
+            <div className="bg-green-50 dark:bg-green-900 p-4 rounded-lg md:col-span-2">
+              <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1 flex items-center">
+                Catatan
+                <span className="ml-2 inline-flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </span>
+              </h3>
+              <p className="text-md whitespace-pre-line">{panenData.catatan}</p>
+            </div>
+          )}
         </div>
         
         <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-500">
