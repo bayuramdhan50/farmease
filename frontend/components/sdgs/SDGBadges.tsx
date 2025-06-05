@@ -2,7 +2,12 @@
 
 import SDGBadge from './SDGBadge';
 
-export default function SDGBadges({ showTitles = false, size = 'sm' }) {
+interface SDGBadgesProps {
+  showTitles?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+export default function SDGBadges({ showTitles = false, size = 'sm' }: SDGBadgesProps) {
   const sdgs = [
     {
       number: 2,

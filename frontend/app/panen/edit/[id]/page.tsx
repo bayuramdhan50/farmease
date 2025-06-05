@@ -1,7 +1,12 @@
+'use client';
+
+import { useParams } from "next/navigation";
 import Link from "next/link";
 import EditPanenForm from "@/components/EditPanenForm";
 
-export default function EditPanenPage({ params }: { params: { id: string } }) {
+export default function EditPanenPage() {
+  const params = useParams();
+  const id = params.id as string;
   return (
     <div className="space-y-6">
       <div className="flex items-center mb-6">
@@ -14,7 +19,7 @@ export default function EditPanenPage({ params }: { params: { id: string } }) {
       </div>
       
       <div className="max-w-2xl mx-auto">
-        <EditPanenForm panenId={params.id} />
+        <EditPanenForm panenId={id} />
       </div>
     </div>
   );

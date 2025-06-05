@@ -1,49 +1,43 @@
-FROM node:18-alpine AS base
+# Base image
+FROM node:18-alpine AS builder
 
-# Install dependencies only when needed
-FROM base AS deps
+# Set working directory
 WORKDIR /app
 
-# Copy package.json files
-COPY package.json package-lock.json* ./
-RUN npm ci
+# Copy dependencies
+COPY package.json package-lock.json ./
 
-# Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+# Install dependencies
+RUN npm install
+
+# Copy all files
 COPY . .
 
-# Next.js collects anonymous telemetry data, disable it
-ENV NEXT_TELEMETRY_DISABLED 1
-
+# Build Next.js app
 RUN npm run build
 
-# Production image, copy all the files and run next
-FROM base AS runner
+# Production image
+FROM node:18-alpine AS runner
+
+# Set working directory
 WORKDIR /app
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+# Copy package.json and package-lock.json
+COPY package.json package-lock.json ./
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Install production dependencies only
+RUN npm install --production
 
+# Copy built application from builder stage
+COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.ts ./
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
+# Expose port
 EXPOSE 3000
 
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
+# Set environment variable to production
+ENV NODE_ENV=production
 
-CMD ["node", "server.js"]
+# Start Next.js
+CMD ["npm", "run", "start"]
